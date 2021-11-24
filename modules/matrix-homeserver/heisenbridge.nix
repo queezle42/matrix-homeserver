@@ -45,7 +45,12 @@ in {
 
     systemd.services.heisenbridge = {
       description = "heisenbridge";
-      after = [ "network.target" "heisenbridge-generate.service" ];
+      after = [
+        "network.target"
+        "heisenbridge-generate.service"
+        "matrix-synapse.service"
+      ];
+      bindsTo = [ "matrix-synapse.service" ];
       requires = [ "heisenbridge-generate.service" ];
       wantedBy = [ "multi-user.target" ];
 
