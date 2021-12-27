@@ -33,7 +33,7 @@ in {
       description = "Synapse Matrix homeserver";
       after = [ "network.target" "postgresql.service" ];
       wantedBy = [ "multi-user.target" ];
-      preStart = "${cfg.synapse.package}/bin/homeserver --config-path ${cfg.synapse.configFile} --keys-directory ${cfg.synapse.dataDir} --generate-keys";
+      preStart = "${cfg.synapse.package}/bin/synapse_homeserver --config-path ${cfg.synapse.configFile} --keys-directory ${cfg.synapse.dataDir} --generate-keys";
       environment = {
         PYTHONPATH = makeSearchPathOutput "lib" cfg.synapse.package.python.sitePackages [ pluginsEnv ];
       } // optionalAttrs (cfg.synapse.withJemalloc) {
@@ -43,7 +43,7 @@ in {
       serviceConfig = {
         Type = "notify";
         ExecStart = ''
-          ${cfg.synapse.package}/bin/homeserver --config-path ${cfg.synapse.configFile} --config-path ''${CREDENTIALS_DIRECTORY} --keys-directory ${cfg.synapse.dataDir}
+          ${cfg.synapse.package}/bin/synapse_homeserver --config-path ${cfg.synapse.configFile} --config-path ''${CREDENTIALS_DIRECTORY} --keys-directory ${cfg.synapse.dataDir}
         '';
 
         User = "matrix-synapse";
