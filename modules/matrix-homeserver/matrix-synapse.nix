@@ -3,9 +3,6 @@ with lib;
 
 let
   cfg = config.matrix-homeserver;
-  pluginsEnv = cfg.synapse.package.python.buildEnv.override {
-    extraLibs = cfg.synapse.plugins;
-  };
 
 in {
   config = mkIf cfg.enable {
@@ -34,9 +31,7 @@ in {
       after = [ "network.target" "postgresql.service" ];
       wantedBy = [ "multi-user.target" ];
       preStart = "${cfg.synapse.package}/bin/synapse_homeserver --config-path ${cfg.synapse.configFile} --keys-directory ${cfg.synapse.dataDir} --generate-keys";
-      environment = {
-        PYTHONPATH = makeSearchPathOutput "lib" cfg.synapse.package.python.sitePackages [ pluginsEnv ];
-      } // optionalAttrs (cfg.synapse.withJemalloc) {
+      environment = optionalAttrs (cfg.synapse.withJemalloc) {
         LD_PRELOAD = "${pkgs.jemalloc}/lib/libjemalloc.so";
       };
 
