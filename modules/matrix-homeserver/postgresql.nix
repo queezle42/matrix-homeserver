@@ -23,7 +23,7 @@ in {
       #    LC_CTYPE = 'C';
       #'';
 
-      listen_address.settings.listen_addresses = mkForce "";
+      settings.listen_addresses = mkForce "";
     };
 
     # matrix-synapse database configuration
