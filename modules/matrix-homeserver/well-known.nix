@@ -14,7 +14,6 @@ let
   serverWellKnown."m.server" = "${cfg.matrixDomain}:443";
   clientWellKnown = {
     "m.homeserver".base_url = "https://${cfg.matrixDomain}";
-    "m.identity_server".base_url = "";
   };
 
 in {
