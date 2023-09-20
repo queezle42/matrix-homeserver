@@ -19,22 +19,27 @@ let
 in {
   config = mkIf cfg.enable {
     # local matrix-synapse listener
-    matrix-homeserver.synapse.settings.listeners = [
-      {
-        port = 8008;
-        tls = false;
-        type = "http";
-        x_forwarded = true;
-        # switch to unix socket when https://github.com/matrix-org/synapse/issues/4975 gets closed
-        bind_addresses = ["127.0.0.1"];
-        resources = [
-          {
-            names = ["client" "federation"];
-            compress = false;
-          }
-        ];
-      }
-    ];
+    matrix-homeserver.synapse.settings = {
+      enable_metrics = true;
+      listeners = [
+        {
+          port = 8008;
+          tls = false;
+          type = "http";
+          x_forwarded = true;
+          # TODO switch to unix socket
+          bind_addresses = ["127.0.0.1"];
+          resources = [
+            {
+              # Metrics are availabe locally on "/_synapse/metrics" but are not
+              # added to the reverse proxy
+              names = ["client" "federation"];
+              compress = false;
+            }
+          ];
+        }
+      ];
+    };
 
     # nginx proxy
     services.nginx.virtualHosts.${cfg.matrixDomain} = {

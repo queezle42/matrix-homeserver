@@ -46,6 +46,14 @@ in {
       '';
     };
 
+    metrics = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        Enable metrics endpoint on "http://127.0.0.1/_synapse/metrics".
+      '';
+    };
+
     defaultDatabase = mkOption {
       type = types.bool;
       default = true;

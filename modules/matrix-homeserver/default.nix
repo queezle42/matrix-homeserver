@@ -8,5 +8,6 @@
     ./well-known.nix
     ./coturn.nix
     ./heisenbridge.nix
+    ./metrics.nix
   ];
 }
