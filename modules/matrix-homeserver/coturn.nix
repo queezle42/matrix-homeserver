@@ -15,7 +15,7 @@ let
     # Log to syslog
     no-stdout-log
     syslog
-    verbose
+    #verbose
 
     # Log STUN binding requests
     log-binding
