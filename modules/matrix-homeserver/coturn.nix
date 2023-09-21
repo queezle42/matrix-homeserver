@@ -25,6 +25,7 @@ let
 
     no-cli
     no-tcp-relay
+    prometheus
 
     # Modern crypto / prevent TLS downgrade to v1.0
     no-tlsv1
