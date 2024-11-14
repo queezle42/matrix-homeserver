@@ -4,7 +4,6 @@ with lib;
 let
   cfg = config.matrix-homeserver;
   staticAuthSecretPath = cfg.coturn.authSecretPath;
-  synapseConfigPath = "/var/lib/matrix-synapse/coturn-secret.yaml";
   configFile = pkgs.writeText "coturn.config" ''
     # static-auth-secret is appended to config when service is started
     use-auth-secret

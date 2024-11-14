@@ -22,6 +22,7 @@ let
 
     defaultCountryCode = "us";
     showLabsSettings = true;
+    show_labs_settings = true;
     enable_presence_by_hs_url = {
       "https://matrix.org" = false;
       "https://matrix-client.matrix.org" = false;
@@ -30,7 +31,7 @@ let
 in {
   config = mkIf cfg.enable {
     services.nginx.virtualHosts.${cfg.elementDomain} = {
-      forceSSL = true;
+      onlySSL = true;
       useACMEHost = cfg.useACMEHost;
       root = pkgs.element-web;
       locations = {

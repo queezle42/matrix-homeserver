@@ -43,7 +43,7 @@ in {
 
     # nginx proxy
     services.nginx.virtualHosts.${cfg.matrixDomain} = {
-      forceSSL = true;
+      onlySSL = true;
       useACMEHost = cfg.useACMEHost;
 
       locations."/".extraConfig = "return 302 'https://${cfg.elementDomain}/';";

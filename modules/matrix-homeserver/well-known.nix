@@ -21,7 +21,7 @@ in {
     # Ensure ssl is configured
     assertions = [
       {
-        assertion = vhost.forceSSL || vhost.enableSSL || vhost.addSSL;
+        assertion = vhost.forceSSL || vhost.onlySSL || vhost.addSSL;
         message = "No ssl configured for services.nginx.virtualHosts.\"${vhostName}\"";
       }
     ];
