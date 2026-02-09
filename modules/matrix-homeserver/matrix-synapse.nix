@@ -3,6 +3,7 @@ with lib;
 
 let
   cfg = config.matrix-homeserver;
+  extraConfigFileArgs = concatStringsSep " " (mapAttrsToList (name: _path: "--config-path \${CREDENTIALS_DIRECTORY}/${name}.yaml") cfg.synapse.extraConfigFiles);
 
 in {
   config = mkIf cfg.enable {
@@ -38,7 +39,7 @@ in {
       serviceConfig = {
         Type = "notify";
         ExecStart = ''
-          ${cfg.synapse.package}/bin/synapse_homeserver --config-path ${cfg.synapse.configFile} --config-path ''${CREDENTIALS_DIRECTORY} --keys-directory ${cfg.synapse.dataDir}
+          ${cfg.synapse.package}/bin/synapse_homeserver --config-path ${cfg.synapse.configFile} ${extraConfigFileArgs} --keys-directory ${cfg.synapse.dataDir}
         '';
 
         User = "matrix-synapse";
