@@ -46,7 +46,7 @@ in {
       onlySSL = true;
       useACMEHost = cfg.useACMEHost;
 
-      locations."/".extraConfig = "return 302 'https://${cfg.elementDomain}/';";
+      locations."=/".extraConfig = "return 302 'https://${cfg.elementDomain}/';";
       locations."/_matrix" = proxyLocationConfig;
       locations."/_synapse/client" = proxyLocationConfig;
     };
