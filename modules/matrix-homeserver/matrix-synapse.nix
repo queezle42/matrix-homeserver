@@ -8,6 +8,7 @@ let
 in {
   config = mkIf cfg.enable {
     matrix-homeserver.synapse.settings = {
+      public_baseurl = "https://${cfg.matrixDomain}";
       pid_file = mkDefault "/run/matrix-synapse.pid";
       signing_key_path = mkDefault "${cfg.synapse.dataDir}/${cfg.serverName}.signing.key";
       media_store_path = mkDefault "${cfg.synapse.dataDir}/media";
