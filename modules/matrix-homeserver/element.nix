@@ -20,7 +20,6 @@ let
     disable_guests = true;
     disable_3pid_login = true;
 
-    defaultCountryCode = "us";
     show_labs_settings = true;
     enable_presence_by_hs_url = {
       "https://matrix.org" = false;
